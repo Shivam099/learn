@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -70,14 +71,20 @@ public class createExcel {
 			
 			XSSFWorkbook rwb=new XSSFWorkbook(fis);
 			Sheet rsh=rwb.getSheetAt(0);
+			System.out.println("Row value:::"+rsh.getRow(1).getCell(1).getStringCellValue());
 			
 			Iterator<Row> rowIterator=rsh.iterator();
 			while(rowIterator.hasNext()){
 				Row row=rowIterator.next();
-				System.out.println("Row value is: "+row);
+				
+				System.out.print("Cell value is:");
+				Iterator<Cell> cellIterator=row.cellIterator();
+				while(cellIterator.hasNext())
+				{
+					Cell cell=cellIterator.next();
+					System.out.print(cell.getStringCellValue());
+				}
 			}
-			
-			System.out.println("Value is:");
 			
 			
 		} catch (FileNotFoundException e) {
